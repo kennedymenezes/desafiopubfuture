@@ -17,10 +17,10 @@ mvn -version
 * [Download Intellj Community ou Ultimate](https://www.jetbrains.com/pt-br/idea/download/other.html)
 * [Download Eclipse IDE](https://www.eclipse.org/downloads/)
 
- 
+
 ### Compilando e Executando o projeto
 
-#### Compilação 
+#### Compilação
 
 mvn clean install package -U -DskipTests
 ___
@@ -35,4 +35,34 @@ cd ../desafiopubfuture/target/
 
 java -jar desafiopubfuture-0.0.1-SNAPSHOT.jar
 
- 
+### Functionalities
+- [x] CRUD Contas
+- [x] CRUD Despesas
+- [x] CRUD Receitas
+- [x] CRUD Pessoas
+- [x] Transferência de saldos
+- [x] Baixa de pagamentos
+- [x] Baixa de receitas
+
+### Dependências
+
+//Spring Boot
+
+org.springframework.boot
+
+//H2 database
+
+com.h2database
+
+//Lombok
+
+org.projectlombok
+
+//Swagger
+
+springfox-swagger2
+
+//Model Mapper
+
+org.modelmapper
+
