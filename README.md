@@ -2,7 +2,7 @@
 
 ### Requisitos para funcionamento
 * [Download Java SDK 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html)
-* [Download Apache Maven 3.8.1](https://maven.apache.org/docs/history.html#maven-3-1)
+* [Download Apache Maven 3.8.4](https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip)
 
 #### Verificando instalação do java
 Definir/Exportar: JAVA_HOME indica o path de instalação do java
