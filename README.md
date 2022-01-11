@@ -35,6 +35,12 @@ cd ../desafiopubfuture/target/
 
 java -jar desafiopubfuture-0.0.1-SNAPSHOT.jar
 
+
+### Controle de versionamento
+
+GIT e GITHub
+
+
 ### Functionalities
 - [x] CRUD Contas
 - [x] CRUD Despesas
