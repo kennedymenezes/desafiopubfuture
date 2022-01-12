@@ -3,6 +3,7 @@ package br.com.desafiopubfuture.service;
 import br.com.desafiopubfuture.dto.ObjectDto;
 import br.com.desafiopubfuture.dto.ReceitaDto;
 import br.com.desafiopubfuture.enums.TipoReceita;
+import br.com.desafiopubfuture.model.Conta;
 import br.com.desafiopubfuture.model.Receita;
 import br.com.desafiopubfuture.repository.ReceitaRepository;
 import org.hibernate.service.spi.ServiceException;
@@ -40,7 +41,7 @@ public class ReceitaService extends BaseService {
     }
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Receita>> getListaReceitasBetweenDataRecebimento(Date inicio, Date fim) throws ServiceException {
+    public ResponseEntity<Iterable<Receita>> getListaReceitasBetweenDataRecebimento(LocalDate inicio, LocalDate fim) throws ServiceException {
         return new ResponseEntity<Iterable<Receita>>(receitaRepository.findByDataRecebimentoBetween(inicio, fim), HttpStatus.OK);
     }
 
@@ -67,11 +68,13 @@ public class ReceitaService extends BaseService {
         Receita obj = receitaRepository.findById(id).get();
         obj.setDataAtualizacao(LocalDate.now());
         obj.setValor(objDto.getValor());
+
         obj.setTipoReceita(objDto.getTipoReceita());
         obj.setDataRecebimentoEsperado(objDto.getDataRecebimentoEsperado());
         obj.setDescricao(objDto.getDescricao());
         if (objDto.getDataRecebimento() != null) {
             obj.setDataRecebimento(objDto.getDataRecebimento());
+            obj.setValorRecebido(objDto.getValorRecebido());
             obj.setConta(contaService.getContaObject(objDto.getContaId()));
         }
 
@@ -82,11 +85,15 @@ public class ReceitaService extends BaseService {
     public ResponseEntity<Receita> atualizarValorDataRecebimento(Long id, BigDecimal valor, LocalDate dataRecebimento) throws ServiceException {
         Receita obj = receitaRepository.findById(id).get();
 
+        //Subtraindo o valor antigo do recebimento
+        contaService.atualizarSaldo(obj.getConta().getId(),(obj.getValor().multiply(new BigDecimal( - 1))));
+
         obj.setDataAtualizacao(LocalDate.now());
         obj.setValor(valor);
         obj.setDataRecebimento(dataRecebimento);
 
-        contaService.atualizarSaldo(obj.getConta().getId(),obj.getConta().getSaldo().add(valor));
+        //Adicionando o valor do recebimento atualizado
+        contaService.atualizarSaldo(obj.getConta().getId(),(obj.getValor().add(valor)));
 
         return new ResponseEntity<>(receitaRepository.save(obj), HttpStatus.OK);
     }

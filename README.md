@@ -36,12 +36,16 @@ cd ../desafiopubfuture/target/
 java -jar desafiopubfuture-0.0.1-SNAPSHOT.jar
 
 
+#### Acesso a API
+http://localhost:8000
+
+
 ### Controle de versionamento
 
 GIT e GITHub
 
 
-### Functionalities
+### Funcionalidades
 - [x] CRUD Contas
 - [x] CRUD Despesas
 - [x] CRUD Receitas
@@ -49,6 +53,9 @@ GIT e GITHub
 - [x] Transferência de saldos
 - [x] Baixa de pagamentos
 - [x] Baixa de receitas
+
+### Acesso a documentação e métodos da API
+http://localhost:8000/swagger-ui.html
 
 ### Dependências
 
