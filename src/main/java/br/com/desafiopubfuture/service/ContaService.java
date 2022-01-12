@@ -1,6 +1,7 @@
 package br.com.desafiopubfuture.service;
 
 import br.com.desafiopubfuture.dto.ContaDto;
+import br.com.desafiopubfuture.dto.ObjectDto;
 import br.com.desafiopubfuture.model.Conta;
 import br.com.desafiopubfuture.model.Pessoa;
 import br.com.desafiopubfuture.repository.ContaRepository;
@@ -12,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Service
 public class ContaService extends BaseService {
@@ -28,24 +29,29 @@ public class ContaService extends BaseService {
     }
 
     //Pesquisa de 1 único resultado por um campo unico
-    public ResponseEntity<Conta> getConta(Integer id) {
-        return new ResponseEntity<>(contaRepository.findById(id), HttpStatus.OK);
+    public ResponseEntity<Conta> getConta(Long id) {
+        return new ResponseEntity<Conta>(contaRepository.findById(id).get(), HttpStatus.OK);
     }
+
+    public Conta getContaObject(Long id) {
+        return contaRepository.findById(id).get();
+    }
+
 
     //Salvando o registro (criando e atualizando
     public ResponseEntity<Conta> salvar(ContaDto objDto) throws ServiceException {
         Conta obj = modelMapper.map(objDto, Conta.class);
-        obj.setDataCadastro(new Date());
-
+        obj.setDataCadastro(LocalDate.now());
+        obj.setDataAtualizacao(LocalDate.now());
         obj.setPessoa(getPessoa(objDto.getPessoaId()));
 
         return new ResponseEntity<>(contaRepository.save(obj), HttpStatus.OK);
     }
 
     //Salvando o registro atualizando
-    public ResponseEntity<Conta> atualizar(Integer id, ContaDto objDto) throws ServiceException {
-        Conta obj = contaRepository.findById(id);
-        obj.setDataAtualizacao(new Date());
+    public ResponseEntity<Conta> atualizar(Long id, ContaDto objDto) throws ServiceException {
+        Conta obj = contaRepository.findById(id).get();
+        obj.setDataAtualizacao(LocalDate.now());
         obj.setContaCorrente(objDto.getContaCorrente());
         obj.setAgencia(objDto.getAgencia());
         obj.setNomeInstituicaoFinanceira(objDto.getNomeInstituicaoFinanceira());
@@ -58,35 +64,38 @@ public class ContaService extends BaseService {
     }
 
     //Atualizar somente o saldo
-    public ResponseEntity<Conta> atualizarSaldo(Integer id, BigDecimal saldo) throws ServiceException {
-        Conta obj = contaRepository.findById(id);
-        obj.setDataAtualizacao(new Date());
+    public ResponseEntity<Conta> atualizarSaldo(Long id, BigDecimal saldo) throws ServiceException {
+        Conta obj = contaRepository.findById(id).get();
+        obj.setDataAtualizacao(LocalDate.now());
         obj.setSaldo(saldo);
 
         return new ResponseEntity<>(contaRepository.save(obj), HttpStatus.OK);
     }
 
     //Transfere o saldo entre contas
-    public ResponseEntity<Conta> transferenciaSaldo(Integer idOrigem, Integer idDestino) throws ServiceException {
-        Conta obj1 = contaRepository.findById(idOrigem);
-        Conta obj2 = contaRepository.findById(idDestino);
+    public ResponseEntity<Conta> transferenciaSaldo(Long idOrigem, Long idDestino) throws ServiceException {
+        Conta obj1 = contaRepository.findById(idOrigem).get();
+        Conta obj2 = contaRepository.findById(idDestino).get();
 
-        obj2.setDataAtualizacao(new Date());
+        obj2.setDataAtualizacao(LocalDate.now());
         obj2.setSaldo(obj2.getSaldo().add(obj1.getSaldo()));
 
-        obj1.setDataAtualizacao(new Date());
+        obj1.setDataAtualizacao(LocalDate.now());
         obj1.setSaldo(obj1.getSaldo().min(obj1.getSaldo()));
 
         return new ResponseEntity<>(contaRepository.save(obj2), HttpStatus.OK);
     }
 
     //Excluindo o registro
-    public ResponseEntity<Void> excluir(Integer id) throws ServiceException {
-        contaRepository.deleteById(id.longValue());
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<ObjectDto> excluir(Long id) throws ServiceException {
+        contaRepository.deleteById(id);
+        ObjectDto exclusaoDto = new ObjectDto();
+        exclusaoDto.setId(id);
+        exclusaoDto.setMensagem("Conta: Registro exluído com sucesso");
+        return new ResponseEntity<ObjectDto>(exclusaoDto, HttpStatus.OK);
     }
 
-    private Pessoa getPessoa(Integer id) {
-        return pessoaRepository.findById(id);
+    private Pessoa getPessoa(Long id) {
+        return pessoaRepository.findById(id).get();
     }
 }

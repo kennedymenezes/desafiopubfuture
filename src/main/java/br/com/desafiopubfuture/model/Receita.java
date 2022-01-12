@@ -1,12 +1,14 @@
 package br.com.desafiopubfuture.model;
 
 import br.com.desafiopubfuture.enums.TipoReceita;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,8 +23,10 @@ public class Receita implements Serializable {
     private Long id;
 
     //Data de cadastro e atualizacao do registro
-    private Date dataCadastro;
-    private Date dataAtualizacao;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataCadastro;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataAtualizacao;
 
     //Conta da vinculada da despesa
     @ManyToOne
@@ -35,10 +39,10 @@ public class Receita implements Serializable {
     private BigDecimal valor;
 
     //Data de previsao de recebimento e data efetiva do recebimento
-    @Temporal(TemporalType.DATE)
-    private Date dataRecebimento;
-    @Temporal(TemporalType.DATE)
-    private Date dataRecebimentoEsperado;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataRecebimento;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataRecebimentoEsperado;
 
     //Descricao da receita
     private String descricao;

@@ -1,29 +1,32 @@
 package br.com.desafiopubfuture.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConstructorBinding;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 
 @Getter
 @Setter
-@ConstructorBinding
 public class Pessoa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //ID da pessoa
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     //Data de cadastro e atualizacao do registro
-    private Date dataCadastro;
-    private Date dataAtualizacao;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataCadastro;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataAtualizacao;
 
     //1 documento 1 pessoa
     @Column(unique = true)

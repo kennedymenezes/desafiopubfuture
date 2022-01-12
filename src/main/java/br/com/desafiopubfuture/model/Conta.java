@@ -1,12 +1,14 @@
 package br.com.desafiopubfuture.model;
 
 import br.com.desafiopubfuture.enums.TipoConta;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,15 +20,17 @@ public class Conta implements Serializable {
     //ID da conta
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     //Define N(Contas) -> 1 (Pessoa)
     @ManyToOne
     private Pessoa pessoa;
 
     //Data de cadastro e atualizacao do registro
-    private Date dataCadastro;
-    private Date dataAtualizacao;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataCadastro;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataAtualizacao;
 
     //Saldo atual da conta
     private BigDecimal saldo;

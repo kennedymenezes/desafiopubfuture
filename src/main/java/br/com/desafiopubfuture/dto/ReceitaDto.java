@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -13,7 +14,7 @@ import java.util.Date;
 public class ReceitaDto {
 
     @NotNull
-    private Integer contaId;
+    private Long contaId;
 
     @NotNull
     private TipoReceita tipoReceita;
@@ -21,8 +22,10 @@ public class ReceitaDto {
     @NotNull
     private BigDecimal valor;
 
-    private Date dataRecebimento;
-    private Date dataRecebimentoEsperado;
+    private BigDecimal valorRecebido;
+
+    private LocalDate dataRecebimento;
+    private LocalDate dataRecebimentoEsperado;
 
     private String descricao;
 }

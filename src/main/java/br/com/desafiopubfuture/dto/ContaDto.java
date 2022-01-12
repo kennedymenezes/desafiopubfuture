@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 public class ContaDto {
     @NotNull
-    private Integer pessoaId;
+    private Long pessoaId;
     @NotNull
     private BigDecimal saldo;
     @NotNull
