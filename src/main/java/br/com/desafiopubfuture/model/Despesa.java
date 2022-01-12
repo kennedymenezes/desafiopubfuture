@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 
@@ -24,9 +23,9 @@ public class Despesa implements Serializable {
     private Long id;
 
     //Data de cadastro e atualizacao do registro
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCadastro;
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataAtualizacao;
 
     //Conta da vinculada da despesa
@@ -41,9 +40,9 @@ public class Despesa implements Serializable {
     private BigDecimal valorPago;
 
     //Data de previsao de pagamento e data da efetivacao do pagamento
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPagamentoEsperado;
-    @JsonFormat(pattern="dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPagamento;
 
     //Descricao da despesa

@@ -3,7 +3,6 @@ package br.com.desafiopubfuture.controllers;
 
 import br.com.desafiopubfuture.dto.ObjectDto;
 import br.com.desafiopubfuture.dto.ReceitaDto;
-import br.com.desafiopubfuture.enums.TipoReceita;
 import br.com.desafiopubfuture.model.Receita;
 import br.com.desafiopubfuture.service.ReceitaService;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 
 @RestController
@@ -31,7 +29,7 @@ public class ReceitasController {
             @ApiResponse(code = 200, message = "Retorna a lista de receita"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @GetMapping(value = "listar" , produces = "application/json")
+    @GetMapping(value = "listar", produces = "application/json")
     public ResponseEntity<Iterable<Receita>> listar() {
         return receitaService.getListaReceitas();
     }

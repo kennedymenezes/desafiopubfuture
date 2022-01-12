@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Service
 public class DespesaService extends BaseService {
@@ -40,7 +39,7 @@ public class DespesaService extends BaseService {
     }
 
     //Pesquisa em lista pelo intervado de datas de pagamento
-    public ResponseEntity<Iterable<Despesa>> getListaDespesasDataPagamento(Date inicio, Date fim) throws ServiceException {
+    public ResponseEntity<Iterable<Despesa>> getListaDespesasDataPagamento(LocalDate inicio, LocalDate fim) throws ServiceException {
         return new ResponseEntity<>(despesaRepository.findByDataPagamentoBetween(inicio, fim), HttpStatus.OK);
     }
 
@@ -87,7 +86,7 @@ public class DespesaService extends BaseService {
         obj.setValor(valor);
         obj.setDataPagamento(dataPagamento);
 
-        contaService.atualizarSaldo(obj.getConta().getId(),obj.getConta().getSaldo().min(valor));
+        contaService.atualizarSaldo(obj.getConta().getId(), obj.getConta().getSaldo().min(valor));
 
         return new ResponseEntity<>(despesaRepository.save(obj), HttpStatus.OK);
     }
