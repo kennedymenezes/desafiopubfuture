@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping(value = "conta")
 public class ContaController {
@@ -57,6 +59,16 @@ public class ContaController {
     @PutMapping(value = "atualizar/{id}", produces = "application/json")
     public ResponseEntity<Conta> atualizar(@Validated @RequestBody ContaDto conta, @PathVariable Long id) {
         return contaService.atualizar(id, conta);
+    }
+
+    @ApiOperation(value = "Atualiza saldo da conta")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna os dados da conta atualizado no banco"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
+    @PatchMapping(value = "atualizarSaldo/{id}/{saldo}", produces = "application/json")
+    public ResponseEntity<Conta> atualizar(@PathVariable Long id, @PathVariable BigDecimal saldo) {
+        return contaService.atualizarSaldo(id, saldo);
     }
 
     @ApiOperation(value = "Exclui uma conta utilizando o ID")
