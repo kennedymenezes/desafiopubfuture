@@ -37,6 +37,7 @@ public class Receita implements Serializable {
 
     //Valor no tipo moeda para salvar o saldo
     private BigDecimal valor;
+    private BigDecimal valorRecebido;
 
     //Data de previsao de recebimento e data efetiva do recebimento
     @JsonFormat(pattern="dd/MM/yyyy")

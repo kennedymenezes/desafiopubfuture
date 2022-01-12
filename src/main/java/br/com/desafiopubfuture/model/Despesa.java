@@ -38,6 +38,7 @@ public class Despesa implements Serializable {
 
     //Valor no tipo moeda para salvar o saldo
     private BigDecimal valor;
+    private BigDecimal valorPago;
 
     //Data de previsao de pagamento e data da efetivacao do pagamento
     @JsonFormat(pattern="dd/MM/yyyy")
