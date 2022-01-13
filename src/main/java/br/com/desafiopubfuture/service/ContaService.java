@@ -38,7 +38,6 @@ public class ContaService extends BaseService {
         return contaRepository.findById(id).get();
     }
 
-
     //Salvando o registro (criando e atualizando
     public ResponseEntity<Conta> salvar(ContaDto objDto) throws ServiceException {
         Conta obj = modelMapper.map(objDto, Conta.class);
@@ -82,7 +81,10 @@ public class ContaService extends BaseService {
         obj2.setSaldo(obj2.getSaldo().add(obj1.getSaldo()));
 
         obj1.setDataAtualizacao(LocalDate.now());
-        obj1.setSaldo(obj1.getSaldo().min(obj1.getSaldo()));
+        obj1.setSaldo(new BigDecimal(0));
+
+        contaRepository.save(obj1);
+        contaRepository.save(obj2);
 
         return new ResponseEntity<>(contaRepository.save(obj2), HttpStatus.OK);
     }

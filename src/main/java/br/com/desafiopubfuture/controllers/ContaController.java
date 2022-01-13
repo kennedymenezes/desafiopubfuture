@@ -62,6 +62,17 @@ public class ContaController {
         return contaService.atualizar(id, conta);
     }
 
+
+    @ApiOperation(value = "Transferência de saldo entre contas")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna o saldo atualizado na conta de destino conta"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
+    @PatchMapping(value = "transferiSaldo/{idOrigem}/{idDestino}", produces = "application/json")
+    public ResponseEntity<Conta> transferiSaldo(@PathVariable Long idOrigem, @PathVariable Long idDestino) {
+        return contaService.transferenciaSaldo(idOrigem, idDestino);
+    }
+
     @ApiOperation(value = "Atualiza saldo da conta")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna os dados da conta atualizado no banco"),
