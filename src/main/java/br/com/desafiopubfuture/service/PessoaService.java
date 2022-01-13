@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class PessoaService extends BaseService {
@@ -19,7 +20,7 @@ public class PessoaService extends BaseService {
     private PessoaRepository pessoaRepository;
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Pessoa>> getListaPessoas() throws ServiceException {
+    public ResponseEntity<List<Pessoa>> getListaPessoas() throws ServiceException {
         return new ResponseEntity<>(pessoaRepository.findAll(), HttpStatus.OK);
     }
 

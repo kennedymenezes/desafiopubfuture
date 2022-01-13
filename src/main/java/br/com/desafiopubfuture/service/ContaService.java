@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ContaService extends BaseService {
@@ -24,7 +25,7 @@ public class ContaService extends BaseService {
     private PessoaRepository pessoaRepository;
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Conta>> getListaContas() throws ServiceException {
+    public ResponseEntity<List<Conta>> getListaContas() throws ServiceException {
         return new ResponseEntity<>(contaRepository.findAll(), HttpStatus.OK);
     }
 

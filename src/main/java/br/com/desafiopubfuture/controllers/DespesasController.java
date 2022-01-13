@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "despesas")
@@ -29,7 +30,7 @@ public class DespesasController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "/listarDespesas", produces = "application/json")
-    public ResponseEntity<Iterable<Despesa>> listar() {
+    public ResponseEntity<List<Despesa>> listar() {
         return despesaService.getListaDespesas();
     }
 
@@ -39,7 +40,7 @@ public class DespesasController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "/listarByTipoDespesa", produces = "application/json")
-    public ResponseEntity<Iterable<Despesa>> listarPorTipoDespesa(TipoDespesa tipoDespesa) {
+    public ResponseEntity<List<Despesa>> listarPorTipoDespesa(TipoDespesa tipoDespesa) {
         return despesaService.getListaDespesasTipos(tipoDespesa);
     }
 
@@ -49,7 +50,7 @@ public class DespesasController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "/listarByDescricao", produces = "application/json")
-    public ResponseEntity<Iterable<Despesa>> listarDescricao(String descricao) {
+    public ResponseEntity<List<Despesa>> listarDescricao(String descricao) {
         return despesaService.getListaDespesasDescricao(descricao);
     }
 
@@ -69,7 +70,7 @@ public class DespesasController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "/listarByDataPagamento/{inicio}/{fim}", produces = "application/json")
-    public ResponseEntity<Iterable<Despesa>> listarDespesasDataPagamentoPeriodo(LocalDate inicio, LocalDate fim) {
+    public ResponseEntity<List<Despesa>> listarDespesasDataPagamentoPeriodo(LocalDate inicio, LocalDate fim) {
         return despesaService.getListaDespesasDataPagamento(inicio, fim);
     }
 

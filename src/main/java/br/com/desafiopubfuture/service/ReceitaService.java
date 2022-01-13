@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ReceitaService extends BaseService {
@@ -24,23 +25,23 @@ public class ReceitaService extends BaseService {
     private ContaService contaService;
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Receita>> getListaReceitas() throws ServiceException {
+    public ResponseEntity<List<Receita>> getListaReceitas() throws ServiceException {
         return new ResponseEntity<>(receitaRepository.findAll(), HttpStatus.OK);
     }
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Receita>> getListaReceitasTipos(TipoReceita tipoReceita) throws ServiceException {
-        return new ResponseEntity<Iterable<Receita>>(receitaRepository.findByTipoReceita(tipoReceita), HttpStatus.OK);
+    public ResponseEntity<List<Receita>> getListaReceitasTipos(TipoReceita tipoReceita) throws ServiceException {
+        return new ResponseEntity<List<Receita>>(receitaRepository.findByTipoReceita(tipoReceita), HttpStatus.OK);
     }
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Receita>> getListaReceitasByDescricao(String descricao) throws ServiceException {
-        return new ResponseEntity<Iterable<Receita>>(receitaRepository.findByDescricaoContains(descricao), HttpStatus.OK);
+    public ResponseEntity<List<Receita>> getListaReceitasByDescricao(String descricao) throws ServiceException {
+        return new ResponseEntity<List<Receita>>(receitaRepository.findByDescricaoContains(descricao), HttpStatus.OK);
     }
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Receita>> getListaReceitasBetweenDataRecebimento(LocalDate inicio, LocalDate fim) throws ServiceException {
-        return new ResponseEntity<Iterable<Receita>>(receitaRepository.findByDataRecebimentoBetween(inicio, fim), HttpStatus.OK);
+    public ResponseEntity<List<Receita>> getListaReceitasBetweenDataRecebimento(LocalDate inicio, LocalDate fim) throws ServiceException {
+        return new ResponseEntity<List<Receita>>(receitaRepository.findByDataRecebimentoBetween(inicio, fim), HttpStatus.OK);
     }
 
     //Pesquisa de 1 único resultado por um campo unico

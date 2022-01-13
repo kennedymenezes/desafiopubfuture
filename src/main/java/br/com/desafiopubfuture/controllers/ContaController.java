@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "conta")
@@ -27,7 +28,7 @@ public class ContaController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "listar", produces = "application/json")
-    public ResponseEntity<Iterable<Conta>> listar() {
+    public ResponseEntity<List<Conta>> listar() {
         return contaService.getListaContas();
     }
 

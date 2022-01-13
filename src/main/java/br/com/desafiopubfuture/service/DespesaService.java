@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class DespesaService extends BaseService {
@@ -24,22 +25,22 @@ public class DespesaService extends BaseService {
     private ContaService contaService;
 
     //Pesquisa em lista
-    public ResponseEntity<Iterable<Despesa>> getListaDespesas() throws ServiceException {
+    public ResponseEntity<List<Despesa>> getListaDespesas() throws ServiceException {
         return new ResponseEntity<>(despesaRepository.findAll(), HttpStatus.OK);
     }
 
     //Pesquisa em lista contendo a descricao
-    public ResponseEntity<Iterable<Despesa>> getListaDespesasDescricao(String descricao) throws ServiceException {
-        return new ResponseEntity<Iterable<Despesa>>(despesaRepository.findByDescricaoContains(descricao), HttpStatus.OK);
+    public ResponseEntity<List<Despesa>> getListaDespesasDescricao(String descricao) throws ServiceException {
+        return new ResponseEntity<List<Despesa>>(despesaRepository.findByDescricaoContains(descricao), HttpStatus.OK);
     }
 
     //Pesquisa em lista contendo a descricao
-    public ResponseEntity<Iterable<Despesa>> getListaDespesasTipos(TipoDespesa tipoDespesa) throws ServiceException {
-        return new ResponseEntity<Iterable<Despesa>>(despesaRepository.findByTipoDespesa(tipoDespesa), HttpStatus.OK);
+    public ResponseEntity<List<Despesa>> getListaDespesasTipos(TipoDespesa tipoDespesa) throws ServiceException {
+        return new ResponseEntity<List<Despesa>>(despesaRepository.findByTipoDespesa(tipoDespesa), HttpStatus.OK);
     }
 
     //Pesquisa em lista pelo intervado de datas de pagamento
-    public ResponseEntity<Iterable<Despesa>> getListaDespesasDataPagamento(LocalDate inicio, LocalDate fim) throws ServiceException {
+    public ResponseEntity<List<Despesa>> getListaDespesasDataPagamento(LocalDate inicio, LocalDate fim) throws ServiceException {
         return new ResponseEntity<>(despesaRepository.findByDataPagamentoBetween(inicio, fim), HttpStatus.OK);
     }
 

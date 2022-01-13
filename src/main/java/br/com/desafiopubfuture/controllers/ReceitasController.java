@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @RestController
@@ -30,7 +31,7 @@ public class ReceitasController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "listar", produces = "application/json")
-    public ResponseEntity<Iterable<Receita>> listar() {
+    public ResponseEntity<List<Receita>> listar() {
         return receitaService.getListaReceitas();
     }
 
@@ -50,7 +51,7 @@ public class ReceitasController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "listarByDescricao", produces = "application/json")
-    public ResponseEntity<Iterable<Receita>> listarDescricao(String descricao) {
+    public ResponseEntity<List<Receita>> listarDescricao(String descricao) {
         return receitaService.getListaReceitasByDescricao(descricao);
     }
 
@@ -60,7 +61,7 @@ public class ReceitasController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "listarByDataRecebimentoPeriodo/{inicio}/{fim}", produces = "application/json")
-    public ResponseEntity<Iterable<Receita>> listarRecitaDataRecebimentoPeriodo(LocalDate inicio, LocalDate fim) {
+    public ResponseEntity<List<Receita>> listarRecitaDataRecebimentoPeriodo(LocalDate inicio, LocalDate fim) {
         return receitaService.getListaReceitasBetweenDataRecebimento(inicio, fim);
     }
 

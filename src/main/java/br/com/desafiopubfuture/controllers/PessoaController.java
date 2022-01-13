@@ -4,13 +4,14 @@ import br.com.desafiopubfuture.dto.ObjectDto;
 import br.com.desafiopubfuture.dto.PessoaDto;
 import br.com.desafiopubfuture.model.Pessoa;
 import br.com.desafiopubfuture.service.PessoaService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "pessoas")
@@ -21,11 +22,11 @@ public class PessoaController {
 
     @ApiOperation(value = "Retorna uma lista de pessoas")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna a lista de pessoa"),
+            @ApiResponse(code = 200, message = "Retorna a lista de pessoa", examples = @Example(value = @ExampleProperty(value = "[]" ))),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping(value = "listar", produces = "application/json")
-    public ResponseEntity<Iterable<Pessoa>> listar() {
+    public ResponseEntity<List<Pessoa>> listar() {
         return pessoaService.getListaPessoas();
     }
 
