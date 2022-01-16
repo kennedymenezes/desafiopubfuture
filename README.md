@@ -1,51 +1,51 @@
-Java # Para compilar e executar o projeto
 
-### Requisitos para funcionamento
+### Operating requirements
 * [Download Java SDK 11](https://www.oracle.com/br/java/technologies/javase/jdk11-archive-downloads.html)
 * [Download Apache Maven 3.8.4](https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.zip)
 
-#### Verificando instalação do java
-Definir/Exportar: JAVA_HOME indica o path de instalação do java
+#### Checking java installation
+
+Define/Export: JAVA_HOME indicates the java installation path
 
 java -version
 
-Definir/Exportar: no PATH "../apache-maven-3.8.4/bin"
+Define/Export: no PATH "../apache-maven-3.8.4/bin"
 
 mvn -version
 
-### IDEs para trabalhar com java
+### IDEs for working with java
 * [Download Intellj Community ou Ultimate](https://www.jetbrains.com/pt-br/idea/download/other.html)
 * [Download Eclipse IDE](https://www.eclipse.org/downloads/)
 
 
-### Compilando e Executando o projeto
+### Compiling and Running the Project
 
-#### Compilação
+#### Compiling
 
 mvn clean install package -U -DskipTests
 ___
-Nome do arquivo criado:
+Created file name:
 desafiopubfuture-0.0.1-SNAPSHOT.jar
 
-*arquivo criado em "../target/"
+*file created in "../target/"
 ___
-#### Execução
+#### Execution
 
 cd ../desafiopubfuture/target/
 
 java -jar desafiopubfuture-0.0.1-SNAPSHOT.jar
 
 
-#### Acesso a API
+#### API access
 http://localhost:8000
 
 
-### Controle de versionamento
+### Versioning control
 
 GIT e GITHub
 
 
-### Funcionalidades
+### Functionalities
 - [x] CRUD Contas
 - [x] CRUD Despesas
 - [x] CRUD Receitas
@@ -54,10 +54,10 @@ GIT e GITHub
 - [x] Baixa de pagamentos
 - [x] Baixa de receitas
 
-### Acesso a documentação e métodos da API
+### Access to API documentation and methods
 http://localhost:8000/swagger-ui.html
 
-### Dependências
+### Dependencies
 
 //Spring Boot
 
