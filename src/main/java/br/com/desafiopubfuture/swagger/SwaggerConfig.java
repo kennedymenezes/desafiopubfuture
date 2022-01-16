@@ -35,9 +35,9 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
     }
 
     private ApiInfo metaDados() {
-        return new ApiInfoBuilder().title("API- Desafio Pub Fututre")
-                .title("API Rest - Desafio Pub Fututre.")
-                .description("Métódos de gerenciamento de Contas a Pagar e Receber.")
+        return new ApiInfoBuilder().title("API- Pub Fututre Challenge")
+                .title("API Rest - Pub Fututre Challenge.")
+                .description("Accounts Payable and Receivable management methods.")
                 .version("1.0.0").build();
     }
 

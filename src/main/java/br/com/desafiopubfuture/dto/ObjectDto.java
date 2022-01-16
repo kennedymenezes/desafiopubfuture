@@ -8,5 +8,5 @@ import lombok.Setter;
 public class ObjectDto {
 
     private Long id;
-    private String mensagem;
+    private String message;
 }
